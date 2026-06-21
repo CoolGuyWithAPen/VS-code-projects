@@ -23,7 +23,11 @@ class Status(commands.Cog):
                 activity = status
         online = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else discord.Status.online
         await ctx.bot.change_presence(status=online, activity=activity)
-        await interaction.response.send_message(f"Status set to: {activity}", ephemeral=True)
+        if activity:
+            await ctx.send(_("Custom status set to `{activity}`.").format(activity=activity))
+        else:
+            await ctx.send(_("Custom status cleared."))
+        #await interaction.response.send_message(f"Status set to: {activity}", ephemeral=True)
 
     @commands.command()
     async def pinging(self, ctx):
