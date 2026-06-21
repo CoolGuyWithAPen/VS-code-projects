@@ -10,7 +10,6 @@ class Status(commands.Cog):
 
     @app_commands.command()
     @app_commands.describe(status="The text to set the custom status to")
-    @commands.is_owner()
     async def setstatus(self, ctx, interaction: discord.Interaction, status: str):
         """Set a custom status for the bot"""
         if len(status) > 128:
