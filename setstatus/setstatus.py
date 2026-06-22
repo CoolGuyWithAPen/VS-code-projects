@@ -1,6 +1,6 @@
 import discord
 
-from redbot.core import commands, app_commands
+from redbot.core import commands, app_commands, checks
 
 class SetStatus(commands.Cog):
     """A simple status cog"""
@@ -9,6 +9,7 @@ class SetStatus(commands.Cog):
         self.bot = bot
 
     @app_commands.command()
+    @checks.admin_or_permissions(administrator=True)
     @app_commands.describe(text="The text to set the custom status to")
     async def setstatus(self, interaction: discord.Interaction, text: str):
         """Set a custom status for the bot"""
@@ -25,15 +26,7 @@ class SetStatus(commands.Cog):
             status=discord.Status.online,
             activity=discord.CustomActivity(name=activity)
         )
-        #status = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else discord.Status.online
-        #await ctx.bot.change_presence(status=status, activity=activity)
         if activity:
             await interaction.response.send_message(f"Status set to: {activity}", ephemeral=True)
         else:
             await interaction.response.send_message("Custom status cleared.", ephemeral=True)
-
-    @commands.command()
-    async def pinging(self, ctx):
-        """Funner ping command"""
-        # Your code will go here
-        await ctx.send("Ponging")
