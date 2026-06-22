@@ -21,6 +21,10 @@ class SetStatus(commands.Cog):
                 activity = None
             else:
                 activity = text
+        await self.bot.change_presence(
+            status=discord.Status.online,
+            activity=discord.CustomActivity(name=activity)
+        )
         #status = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else discord.Status.online
         #await ctx.bot.change_presence(status=status, activity=activity)
         if activity:
