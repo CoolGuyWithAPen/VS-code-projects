@@ -2,7 +2,7 @@ import discord
 
 from redbot.core import commands, app_commands
 
-class Status(commands.Cog):
+class SetStatus(commands.Cog):
     """A simple status cog"""
 
     def __init__(self, bot):
