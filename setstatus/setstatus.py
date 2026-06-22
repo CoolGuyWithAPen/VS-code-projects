@@ -10,7 +10,7 @@ class SetStatus(commands.Cog):
 
     @app_commands.command()
     @app_commands.describe(text="The text to set the custom status to")
-    async def setstatus(self, ctx, interaction: discord.Interaction, text: str):
+    async def setstatus(self, interaction: discord.Interaction, text: str):
         """Set a custom status for the bot"""
         if len(text) > 128:
             activity = None
@@ -21,8 +21,8 @@ class SetStatus(commands.Cog):
                 activity = None
             else:
                 activity = text
-        status = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else discord.Status.online
-        await ctx.bot.change_presence(status=status, activity=activity)
+        #status = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else discord.Status.online
+        #await ctx.bot.change_presence(status=status, activity=activity)
         if activity:
             await interaction.response.send_message(f"Status set to: {activity}", ephemeral=True)
         else:
